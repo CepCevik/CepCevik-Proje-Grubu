@@ -1,0 +1,15 @@
+.button-large {
+    padding: 20px 60px;
+    font-size: 24px;
+    margin: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    transition: 0.3s;
+  }
+  .button-large:hover {
+    background-color: #0056b3;
+  }
+  
