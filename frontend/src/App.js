@@ -1,3 +1,4 @@
+// frontend/src/App.js
 
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import StudentDashboard from "../src/pages/StudentDashborad";
 import ClubDashboard from "../src/pages/ClupDashboard";
+import ProfilePage from "./pages/ProfilePage"; // <--- YENİ IMPORT
 
 // Basit PrivateRoute bileşeni
 const PrivateRoute = ({ user, children, allowedType }) => {
@@ -38,13 +40,15 @@ const App = () => {
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("user");
+    // Çıkış yaptıktan sonra ana sayfaya yönlendir
+    window.location.href = "/";
   };
 
   return (
     <Router>
       <Routes>
         {/* Ana sayfa */}
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage user={user} />} />
 
         {/* Login */}
         <Route path="/login" element={<SignInPage onLogin={handleLogin} />} />
@@ -57,7 +61,7 @@ const App = () => {
           path="/student"
           element={
             <PrivateRoute user={user} allowedType="student">
-              <StudentDashboard user={user} onLogout={handleLogout} />
+              <StudentDashboard onLogout={handleLogout} />
             </PrivateRoute>
           }
         />
@@ -67,9 +71,19 @@ const App = () => {
           path="/club"
           element={
             <PrivateRoute user={user} allowedType="club">
-              <ClubDashboard user={user} onLogout={handleLogout} />
+              <ClubDashboard onLogout={handleLogout} />
             </PrivateRoute>
           }
+        />
+        
+        {/* Profil Sayfası (private) */}
+        <Route 
+          path="/profile" 
+          element={
+            <PrivateRoute user={user}>
+              <ProfilePage onLogout={handleLogout} /> 
+            </PrivateRoute>
+          } 
         />
 
         {/* Tanımlanmayan rotalar için */}

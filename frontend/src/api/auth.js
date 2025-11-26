@@ -29,3 +29,22 @@ export async function loginUser(data) {
   if (!res.ok) throw new Error("Login failed");
   return await res.json();
 }
+
+
+export async function fetchUserProfile() {
+  const token = localStorage.getItem("token");
+  // Kullanıcının login sırasında localStorage'a kaydettiği token'ı kullanır
+  if (!token) throw new Error("Token bulunamadı. Giriş yapınız.");
+
+  const res = await fetch(`${BASE_URL}profile/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      // JWT'yi Authorization başlığında gönderir
+      "Authorization": `Bearer ${token}` 
+    },
+  });
+
+  if (!res.ok) throw new Error("Profil bilgileri çekilemedi.");
+  return await res.json();
+}
