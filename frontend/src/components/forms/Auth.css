@@ -1,0 +1,90 @@
+/* Form kapsayıcısı */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Elemanlar arası boşluk */
+  width: 100%;
+}
+
+/* Tüm input ve select kutuları için ortak stil */
+.auth-input, .auth-select {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Köşeleri yuvarlatma */
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  box-sizing: border-box; /* Padding'i genişliğe dahil et */
+}
+
+.auth-input:focus, .auth-select:focus {
+  outline: none;
+  border-color: #007bff; /* Odaklanınca mavi çerçeve */
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Textarea için özel ayar (eğer kullanılıyorsa) */
+textarea.auth-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Buton stili */
+.auth-button {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-top: 10px;
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+}
+
+.auth-button:active {
+  transform: scale(0.98); /* Tıklama efekti */
+}
+
+/* Hata mesajları için */
+.error-text {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  text-align: left;
+  padding-left: 5px;
+}
+/* Geri Dön butonu için ikincil stil */
+.auth-back-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #666; /* Daha yumuşak bir gri */
+  background-color: transparent;
+  border: 2px solid #eee; /* Hafif çerçeve */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px; /* Üstteki form ile arasına mesafe */
+}
+
+.auth-back-button:hover {
+  background-color: #f8f9fa;
+  border-color: #ddd;
+  color: #333;
+  transform: translateY(-1px); /* Hafif yukarı kalkma efekti */
+}
+
+.auth-back-button:active {
+  transform: scale(0.98);
+}

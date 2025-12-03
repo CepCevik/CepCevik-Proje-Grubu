@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate import edildi
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import SignUpForm from "../components/forms/SignUpForm";
 import { signupStudent, signupClub } from "../api/auth";
+import "../components/forms/Auth.css"; // CSS dosyasını import et
 
 const SignUpPage = () => {
+  const navigate = useNavigate(); // navigate tanımlandı
   const [formData, setFormData] = useState({
     type: "",
     email: "",
     password: "",
-    // student
     name: "",
     nick_name: "",
     number: "",
     department: "",
     term: "",
-    // club
     description: "",
   });
   const [userType, setUserType] = useState("");
@@ -53,64 +54,19 @@ const SignUpPage = () => {
       }
 
       setMessage(res.message || "Kayıt başarılı!");
+      // Formu temizle
       setFormData({
-        type: "",
-        email: "",
-        password: "",
-        name: "",
-        nick_name: "",
-        number: "",
-        department: "",
-        term: "",
-        description: "",
+        type: "", email: "", password: "", name: "", nick_name: "",
+        number: "", department: "", term: "", description: "",
       });
       setUserType("");
+      
     } catch (error) {
       console.error(error);
-      setMessage(
-        error.message || "Kayıt sırasında bir hata oluştu"
-      );
+      setMessage(error.message || "Kayıt sırasında bir hata oluştu");
     }
   };
-/*
-  return (
-    <BackgroundWrapper image="ytu.jpg">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: "100vh",
-          color: "#fff",
-          textAlign: "center",
-          padding: "20px",
-        }}
-      >
-        <h1>Kayıt Ol</h1>
-        <SignUpForm
-          formData={formData}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          userType={userType}
-        />
-        {message && (
-          <p
-            style={{
-              marginTop: "20px",
-              backgroundColor: "rgba(0,0,0,0.6)",
-              padding: "10px 20px",
-              borderRadius: "8px",
-              display: "inline-block",
-            }}
-          >
-            {message}
-          </p>
-        )}
-      </div>
-    </BackgroundWrapper>
-  );
-  */
+
   return (
     <BackgroundWrapper image="ytu.jpg">
       <div
@@ -122,23 +78,16 @@ const SignUpPage = () => {
           padding: "20px",
         }}
       >
-        {/* BEYAZ KUTU */}
         <div
           style={{
             width: "380px",
-            backgroundColor: "white",
+            backgroundColor: "rgba(255,255,255,0.95)",
             padding: "30px",
             borderRadius: "12px",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
           }}
         >
-          <h1
-            style={{
-              textAlign: "center",
-              marginBottom: "20px",
-              color: "#333",
-            }}
-          >
+          <h1 style={{ textAlign: "center", marginBottom: "25px", color: "#333" }}>
             Kayıt Ol
           </h1>
   
@@ -148,16 +97,26 @@ const SignUpPage = () => {
             onSubmit={handleSubmit}
             userType={userType}
           />
+
+          {/* YENİ EKLENEN GERİ DÖN BUTONU */}
+          <button 
+            className="auth-back-button" 
+            onClick={() => navigate("/")}
+          >
+            ← Ana Sayfaya Dön
+          </button>
   
           {message && (
             <p
               style={{
                 marginTop: "20px",
-                backgroundColor: "rgba(0, 100, 0, 0.1)",
+                backgroundColor: message.includes("hata") ? "rgba(231, 76, 60, 0.1)" : "rgba(46, 204, 113, 0.1)",
                 padding: "10px",
                 borderRadius: "8px",
                 textAlign: "center",
-                color: "green",
+                color: message.includes("hata") ? "#c0392b" : "#27ae60",
+                fontSize: "14px",
+                fontWeight: "500"
               }}
             >
               {message}
@@ -167,7 +126,6 @@ const SignUpPage = () => {
       </div>
     </BackgroundWrapper>
   );
-  
 };
 
 export default SignUpPage;
