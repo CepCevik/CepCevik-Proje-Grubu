@@ -38,3 +38,48 @@ export async function fetchMyClubMembers() {
   if (!res.ok) throw new Error("Üyeler yüklenemedi.");
   return await res.json();
 }
+
+// 4. Yeni Etkinlik Oluştur (Kulüp Yöneticisi için) - YENİ EKLENDİ
+export async function createEvent(eventData) {
+  const res = await fetch(`${BASE_URL}events/`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(eventData),
+  });
+  
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.error || "Etkinlik oluşturulamadı.");
+  }
+  
+  return await res.json();
+}
+
+
+// 5. Tüm Etkinlikleri Getir (Öğrenci/Anasayfa için)
+export async function fetchEvents() {
+  const res = await fetch(`${BASE_URL}events/`, {
+    method: "GET",
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) throw new Error("Etkinlikler yüklenemedi.");
+  return await res.json();
+}
+
+export async function createAnnouncement(data) {
+  const res = await fetch(`${BASE_URL}announcements/`, {
+    method: "POST",
+    headers: getAuthHeaders(),
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Duyuru paylaşılamadı.");
+  return await res.json();
+}
+
+export async function fetchAnnouncements() {
+  const res = await fetch(`${BASE_URL}announcements/`, {
+    method: "GET",
+    headers: getAuthHeaders(),
+  });
+  return await res.json();
+}
