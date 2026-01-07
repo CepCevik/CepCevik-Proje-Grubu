@@ -1,5 +1,5 @@
 .background-wrapper {
-    background-image: url('ytu.jpg'); /* public içine koy */
+    background-image: url('ytu.jpg'); 
     background-size: cover;
     background-position: center;
     height: 100vh;

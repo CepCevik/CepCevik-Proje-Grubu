@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'accounts',
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,15 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    # Bu, kullanıcının aktif olarak işlem yapabileceği süredir.
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60), 
+    
+    # Bu, kullanıcının "Beni Hatırla" mantığıyla sistemde kalma süresidir.
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+}

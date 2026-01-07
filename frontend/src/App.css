@@ -1,38 +1,166 @@
-.App {
-  text-align: center;
+/* --- GENEL SIFIRLAMA --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  /* background-color: #f4f7f6; <-- BU SATIRI SİL YA DA ŞEFFAF YAP */
+  background-color: transparent !important; 
+  overflow-x: hidden;
+  overflow-y: auto !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* --- DEV YATAY NAVBAR (SABİT) --- */
+/* --- DEV YATAY NAVBAR (SABİT) --- */
+/* --- DEV YATAY NAVBAR (GÜNCELLENDİ) --- */
+/* --- KESİN ÇÖZÜM: NAVBAR --- */
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important; 
+  width: 100% !important; /* vw bazen scrollbar ile çakışır, %100 daha güvenlidir */
+  height: 100px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 100000 !important; /* Z-index'i bir tık daha artırdık */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+  border-bottom: 3px solid #007bff !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-menu {
+  display: flex !important;
+  width: 95% !important;        /* Ekranın neredeyse tamamını kullan */
+  max-width: 1800px !important; /* Çok geniş ekranlarda aşırı yayılmasın ama dar da kalmasın */
+  gap: 15px !important;         /* Butonlar arasındaki nefes alma boşluğu */
+  justify-content: space-evenly !important;
+  align-items: center !important;
 }
 
-.App-header {
-  background-color: #282c34;
+.nav-btn {
+  flex: 1 !important;           /* Butonların tüm boşluğu eşit paylaşarak devleşmesini sağlar */
+  height: 80px !important;       /* Navbar 100px olduğu için 80px çok daha dolgun durur */
+  display: flex !important;
+  flex-direction: column !important; /* İkon üstte, yazı altta olsun istersen (isteğe bağlı) */
+  justify-content: center !important;
+  align-items: center !important;
+  
+  background: #f8f9fa !important;
+  border: 1px solid #ddd !important;
+  border-radius: 12px !important;
+  
+  /* YAZI VE İKON BOYUTU */
+  font-size: 18px !important;    /* Yazıları büyüttük */
+  font-weight: 800 !important;   /* Yazıları daha kalın yaptık */
+  color: #333 !important;
+  
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  gap: 5px !important;           /* İkon ile yazı arasındaki boşluk */
+}
+
+/* Aktif butonu daha da belirgin yapalım */
+.nav-btn.active {
+  background: #007bff !important;
+  color: white !important;
+  transform: scale(1.02);        /* Aktif buton bir tık daha büyük görünsün */
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3) !important;
+}
+
+/* Çıkış butonunu (logout-nav) özel olarak ayıralım */
+.logout-nav {
+  background-color: #fff0f0 !important;
+  color: #dc3545 !important;
+  border-color: #ffcccc !important;
+}
+
+/* --- ANA SAHNE (KAYDIRMA DOSTU) --- */
+.main-stage {
+  padding-top: 130px !important; /* Navbar yüksekliğinden biraz fazla boşluk */
+  padding-bottom: 50px !important;
+  width: 100vw !important;
   min-height: 100vh;
+  display: flex !important;
+  flex-direction: column !important; /* İçerikler alt alta dizilsin */
+  align-items: center !important; 
+  /* justify-content: center ve align-items: center'ı sildim çünkü listeyi merkeze hapseder */
+  box-sizing: border-box !important;
+}
+
+/* SİYAH CAM FORM KUTUSU (SIGN-IN VE POST OLUŞTURMA İÇİN) */
+.centered-glass-box {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  padding: 40px !important;
+  border-radius: 20px;
+  width: 90% !important;
+  max-width: 450px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 20px;
+}
+
+.fixed-input {
+  width: 100% !important;
+  padding: 14px !important;
+  margin-bottom: 20px !important;
+  background: white !important;
+  border-radius: 8px !important;
+  color: #333 !important;
+  box-sizing: border-box !important;
+}
+
+.form-submit-btn {
+  width: 100% !important;
+  padding: 15px !important;
+  background: #28a745 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-weight: bold !important;
+  cursor: pointer;
+}
+
+/* ANKET ŞIKLARI */
+.poll-btn-modern {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+
+/* Arka plan görseli için özel stil */
+/* ARKA PLAN GÖRSELİ - KESİN ÇÖZÜM */
+.background-image-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: -100 !important; /* Çok geriye atıyoruz ki her şey üstünde kalsın */
+  overflow: hidden !important;
+  pointer-events: none !important; /* Tıklamaları engellemez */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.background-image-container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Ekranı tam doldurur, sünme yapmaz */
+  opacity: 1 !important; /* "Kendi gibi kalsın" dediğin için tam net */
+}
+
+.feed-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

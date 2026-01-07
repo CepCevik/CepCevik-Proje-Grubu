@@ -43,14 +43,21 @@ const StudentDashboard = ({ onLogout }) => {
   return (
     <BackgroundWrapper image="ytu.jpg">
       <div style={{
-        minHeight: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        paddingTop: "40px",
-        color: "white",
-      }}>
+      minHeight: "100vh", 
+      height: "auto",      // İçerik uzadıkça kutu da uzasın
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      paddingTop: "150px", // Navbar'ın altında kalmasın diye artırdık
+      paddingBottom: "50px",
+      color: "white",
+      overflowY: "visible", // Taşmaya izin ver
+      position: "relative"
+    }}>
+        
+
+
         
         <div style={{
           backgroundColor: "rgba(0,0,0,0.7)",
@@ -86,20 +93,40 @@ const StudentDashboard = ({ onLogout }) => {
                     <h3 style={{ margin: "0 0 5px 0" }}>{club.name}</h3>
                     <p style={{ margin: 0, fontSize: "0.9rem", color: "#ddd" }}>{club.description || "Açıklama yok"}</p>
                   </div>
-                  <button 
-                    onClick={() => handleJoinToggle(club.id)}
-                    style={{
-                      padding: "10px 20px",
-                      borderRadius: "5px",
-                      border: "none",
-                      cursor: "pointer",
-                      backgroundColor: club.is_joined ? "#dc3545" : "#28a745", // Kırmızı (Ayrıl) veya Yeşil (Katıl)
-                      color: "white",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    {club.is_joined ? "Ayrıl" : "Katıl"}
-                  </button>
+
+                  {/* BUTON GRUBU */}
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    {/* 🔵 YENİ: SAYFAYA GİT BUTONU */}
+                    <button 
+                      onClick={() => navigate(`/club/${club.id}`)}
+                      style={{
+                        padding: "10px 15px",
+                        borderRadius: "5px",
+                        border: "none",
+                        cursor: "pointer",
+                        backgroundColor: "#007bff", // Mavi
+                        color: "white",
+                        fontWeight: "bold"
+                      }}
+                    >
+                      👁️ Sayfaya Git
+                    </button>
+
+                    <button 
+                      onClick={() => handleJoinToggle(club.id)}
+                      style={{
+                        padding: "10px 20px",
+                        borderRadius: "5px",
+                        border: "none",
+                        cursor: "pointer",
+                        backgroundColor: club.is_joined ? "#dc3545" : "#28a745",
+                        color: "white",
+                        fontWeight: "bold"
+                      }}
+                    >
+                      {club.is_joined ? "Ayrıl" : "Katıl"}
+                    </button>
+                  </div>
                 </div>
               ))}
               {clubs.length === 0 && <p>Henüz hiç kulüp yok.</p>}
